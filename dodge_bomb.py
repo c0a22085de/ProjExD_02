@@ -6,7 +6,7 @@ import pygame as pg
 WIDTH, HEIGHT = 1600, 900
 
 delta = {
-    pg.K_UP: (0, -5),
+    pg.K_UP : (0, -5),
     pg.K_DOWN: (0, +5),
     pg.K_LEFT: (-5, 0),
     pg.K_RIGHT: (+5, 0)
@@ -28,6 +28,18 @@ def main():
     bg_img = pg.image.load("ex02/fig/pg_bg.jpg")
     kk_img = pg.image.load("ex02/fig/3.png")
     kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
+    kk_img1 = pg.transform.flip(kk_img, True, False)
+    muki = {
+    (0, 0):kk_img,
+    (0, -5):pg.transform.rotozoom(kk_img1, 90, 1.0),
+    (+5, -5):pg.transform.rotozoom(kk_img1, 45, 1.0),
+    (+5, 0):kk_img1,
+    (+5, +5):pg.transform.rotozoom(kk_img1, -45, 1.0),
+    (0, +5):pg.transform.rotozoom(kk_img1, -90, 1.0),
+    (-5, +5):pg.transform.rotozoom(kk_img, 45, 1.0),
+    (-5, 0):kk_img,
+    (-5, -5):pg.transform.rotozoom(kk_img, -45, 1.0)
+    }
     kk_rct = kk_img.get_rect()
     kk_rct.center = 900, 400
     bb_img = pg.Surface((20,20))  # 練習1透明のsurfase
@@ -56,6 +68,8 @@ def main():
                 sum_mv[0] += tpl[0]
                 sum_mv[1] += tpl[1]
 
+        kk_img = muki[tuple(sum_mv)]
+
         screen.blit(bg_img, [0, 0])
         kk_rct.move_ip(sum_mv[0], sum_mv[1])
         if check_bound(kk_rct) != (True, True):
@@ -71,7 +85,7 @@ def main():
         screen.blit(bb_img, bb_rct)
         pg.display.update()
         tmr += 1
-        clock.tick(10)
+        clock.tick(50)
         clock.tick(50)
 
 
