@@ -32,7 +32,7 @@ def main():
     new_width, new_height = 120, 120
     kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
     kk_img1 = pg.transform.flip(kk_img, True, False)
-    muki = {
+    muki = {  # こうかとんの向き
     (0, 0):kk_img,
     (0, -5):pg.transform.rotozoom(kk_img1, 90, 1.0),
     (+5, -5):pg.transform.rotozoom(kk_img1, 45, 1.0),
@@ -94,7 +94,7 @@ def main():
         pg.display.update()
         tmr += 1
         clock.tick(50)
-        clock.tick(50)
+    
 
 
 if __name__ == "__main__":
